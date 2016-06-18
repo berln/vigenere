@@ -13,8 +13,6 @@ int soustraction(int lhs, int rhs, int taillalpha) {
 	if(result < 0) {
 		result += taillalpha;
 	}
-
-	printf("Math time! %d - %d = %d\n", lhs, rhs, result);
 	return result;
 }
 
@@ -31,7 +29,7 @@ int main(int argc, char **argv)
 	int * iclef;
 	int * itab;
 	Boolean casetwo = FALSE;
-	Boolean rm_unknown_char = FALSE;
+	Boolean unknown_char = FALSE;
 
 
 	int c;
@@ -58,13 +56,13 @@ int main(int argc, char **argv)
             break;
 
        case 'h':
-            printf("man\n");
+            print_man(FALSE);
             return 0;
             break;
 
        case 's':
             printf("option c with value '%s'\n", optarg);
-            rm_unknown_char = TRUE;
+            unknown_char = TRUE;
             break;
 
        case 'k':
@@ -80,7 +78,7 @@ int main(int argc, char **argv)
 
    switch(argc - optind){
       case 0:
-        printf("pas d'argument entrer une chaine\n");
+        printf("pas d'argument entrez une chaine\n");
         tab=calloc(100,sizeof(char));
         fgets(tab,100,stdin);
       break;
@@ -96,26 +94,26 @@ int main(int argc, char **argv)
       break;
 }
 
-	if (rm_unknown_char == TRUE)
+	if (unknown_char == TRUE)
 		{
 			/* remove uknow char if -s */
 			printf("remove unknown char\n");
 			rm_unknown_char(tab, alphabet);
 		}
 
-	tailletab =strlen(tab)-1;
-	tailleclef=strlen(clef)-1;
-  taillalpha=strlen(alphabet)-1;
+	tailletab =strlen(tab);
+	tailleclef=strlen(clef);
+    taillalpha=strlen(alphabet);
 	itab=malloc(tailletab*sizeof(int));
 	iclef=malloc(tailleclef*sizeof(int));
 
 
 
 	string_to_int (tab,alphabet,itab);
-	afficheint(itab,tailletab);
+
 	string_to_int (clef,alphabet,iclef);
-	afficheint(iclef,tailleclef);
-  testclef(iclef, tailleclef);
+	
+    testclef(iclef, tailleclef);
 
 	codclef(iclef, itab, tailletab, tailleclef, taillalpha, &soustraction);
 

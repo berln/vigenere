@@ -2,17 +2,12 @@
 #include <stdlib.h>
 #include "utils.h"
 
-void affichechar(char * tab){
-	printf("chaine %s\n",tab );
-}
 void string_to_int(char * tab, char * alphabet, int * itab){
 	int i;
-	affichechar(tab);
 	for (i = 0; tab [i] !='\0' ; ++i)
 	{
 		
 		itab[i]=alphatoint(tab[i],alphabet);
-		printf("caract en cours de traitement%d\n",itab[i] );
 	}
 }
 
@@ -20,7 +15,6 @@ int alphatoint(char l,char * alphabet){
 	int i;
 	for (i = 0; alphabet [i] != '\0' ; ++i)
 	{
-		printf("carac %c recherche %c\n",l,alphabet[i] );
 		if (l == alphabet[i])
 			return i;
 	}
@@ -32,7 +26,6 @@ void codclef (int * iclef,int * itab,int tailletab,int tailleclef,int taillalpha
 	int i,j;
 	for (i=0, j=0; i < tailletab; ++i, j = (j + 1) % tailleclef)
 	{
-		printf("itab %d iclef %d\n", itab[i], iclef[j]);
 
 		/* itab[i]=itab[i]+iclef[j];
 
@@ -41,7 +34,6 @@ void codclef (int * iclef,int * itab,int tailletab,int tailleclef,int taillalpha
 		if ((itab[i]>=0)&&(iclef[j]>=0))
 			itab[i] = (*operation)(itab[i], iclef[j], taillalpha);
 
-		printf("resultat par clef %d\n", itab[i]);
 		/* code */
 	}
 }
@@ -52,7 +44,6 @@ void inttoalpha(int * itab, char * tab, char * alphabet,int tailletab){
 	{
 		if (itab[i]>=0){
 			tab[i] = alphabet[itab[i]];
-			printf("caracter convert to alpha =%d = %c\n",itab[i],tab[i] );
 		}
 	}
 
@@ -106,19 +97,18 @@ void write_file(char * filename, char * var)
 }
 
 
-void rm_unknown_char(char * tab, cahr * alphabet){
+void rm_unknown_char(char * tab, char * alphabet){
 	int i;
-	int j;
-	char tmp;
-	for (i = 0; tab[i] != '\0'; ++i)
+	int j=0;
+	for (i = 0; tab[i+1] != '\0'; ++i)
 	{
 		/* parsing tab in search of uknown cahr */
-		if (((alphatoint(tab[i],char * alphabet))<0)||tab[i]=='\0')
+		if ((alphatoint(tab[i], alphabet))<0)
 			j++;
 		else
 			tab[i-j]=tab[i];
 	}
-	printf("%s\n",tab );
+	tab[i-j]='\0';
 }
 
 void testclef(int * itab, int tailleclef){
@@ -140,4 +130,19 @@ void error(int e){
 		default: printf("error incunue\n"); break;
 	}
 	exit(e);
+}
+
+void print_man(Boolean option){
+	printf("Options : [-sh] [--help] [--skip] [-a alphabet] [-k clé] [--alphabet=alphabet] [--key=clé]\n");
+	if (option==TRUE)
+	{
+		printf("Le programme code encode un texte en utilisant le code Vigenere.\n Lorsqu aucun fichier n est fourni, l encodage se fait depuis l entree standard vers la sortie standard, ligne par ligne.\nLorsqu un seul fichier est fourni, l encodage se fait depuis le fichier vers la sortie standard.\nLorsque deux fichiers sont fournis, l encodage se fait depuis le premier vers le deuxieme.\nL option -s (--skip), lorsqu elle est presente, indique que les lettres du\n");
+		printf("texte à encoder non présentes dans l alphabet sont supprimees.\nLorsqu elle est absente, ces lettres restent en clair dans le message code.\n");
+		printf("Les options -a (--alphabet) et -k (--key) permettent de specifier les fichiers contenant respectivement l alphabet et la cle. Si elles sont absentes,\nlealphabet est l alphabet latin non accentue compose uniquement de lettres minuscules (abcdefghijklmnopqrstuvwxyz) et la cle est notaverysmartkey.\nL option -h (--help) affiche ce manuel.\n");
+	}
+	else
+	{
+		printf("Le programme decode decode un texte en utilisant le code Vigenere.\nLorsqu aucun fichier n est fourni, le decodage se fait depuis l entree standard vers la sortie standard, ligne par ligne.\nLorsqu un seul fichier est fourni, le decodage se fait depuis le fichier vers la sortie standard.\nque deux fichiers sont fournis, l encodage se fait depuis le premier vers le deuxieme.\nL otion -s (--skip), lorsqu elle est presente, indique que les lettres du texte à decoder non presentes dans l alphabet");
+		printf("sont supprimees. Lorsqu elle est absente, ces lettres sont restituees telles quelles dans le message decode.\nLes options -a (--alphabet) et -k (--key) permettent de specifier les fichiers contenant respectivement l alphabet et la cle.\nSi elles sont absentes, l alphabet est l alphabet latin non accentue compose uniquement de lettres minuscules (abcdefghijklmnopqrstuvwxyz)\net la cle est notaverysmartkey\nL option -h (--help) affiche ce manuel.\n");
+	}
 }

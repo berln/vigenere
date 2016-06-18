@@ -19,6 +19,7 @@ int main(int argc, char  *argv[])
 	int * iclef;
 	int * itab;
 	Boolean casetwo = FALSE;
+	Boolean unknown_char = FALSE;
 
 
 	int c;
@@ -44,12 +45,13 @@ int main(int argc, char  *argv[])
             break;
 
        case 'h':
-            printf("man\n");
+            print_man(TRUE);
             return 0;
             break;
 
        case 's':
             printf("option c with value '%s'\n", optarg);
+            unknown_char = TRUE;
             break;
 
        case 'k':
@@ -63,7 +65,7 @@ int main(int argc, char  *argv[])
         }
     }
 
-   switch(argc - optind){
+    switch(argc - optind){
       case 0:
         printf("pas d'argument entrer une chaine\n");
         tab=calloc(100,sizeof(char));
@@ -79,12 +81,18 @@ int main(int argc, char  *argv[])
         casetwo=TRUE;
         tab=filetostring(argv[optind]);
       break;
-}
+	}
 
+	if (unknown_char == TRUE)
+		{
+			/* remove uknow char if -s */
+			printf("remove unknown char\n");
+			rm_unknown_char(tab, alphabet);
+		}
 
-	tailletab =strlen(tab)-1;
-	tailleclef=strlen(clef)-1;
-  taillalpha=strlen(alphabet)-1;
+	tailletab =strlen(tab);
+	tailleclef=strlen(clef);
+  	taillalpha=strlen(alphabet);
 
 	itab=malloc(tailletab*sizeof(int));
 	iclef=malloc(tailleclef*sizeof(int));
@@ -93,10 +101,8 @@ int main(int argc, char  *argv[])
 	printf("taille clef %d\n", tailleclef );
 
 	string_to_int (tab,alphabet,itab);
-	afficheint(itab,tailletab);
 	string_to_int (clef,alphabet,iclef);
-	afficheint(iclef,tailleclef);
-  testclef(iclef, tailleclef);
+    testclef(iclef, tailleclef);
 
 	codclef(iclef, itab, tailletab, tailleclef, taillalpha, &addition);
 
