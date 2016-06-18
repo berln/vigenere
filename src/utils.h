@@ -12,6 +12,7 @@ void codclef (int * iclef,int * itab,int tailletab,int tailleclef,int taillalpha
 void inttoalpha(int * itab, char * tab, char * alphabet,int tailletab);
 void * filetostring(char * read_file);
 void write_file(char * file, char * var);
+void rm_unknown_char(char * tab, cahr * alphabet);
 void error(int e);
 
 #endif

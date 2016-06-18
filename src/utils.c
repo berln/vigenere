@@ -103,6 +103,23 @@ void write_file(char * filename, char * var)
       
 }
 
+void rm_unknown_char(char * tab, cahr * alphabet){
+	int i;
+	int j;
+	char tmp;
+	for (i = 0; tab[i] != '\0'; ++i)
+	{
+		/* parsing tab in search of uknown cahr */
+		if (((alphatoint(tab[i],char * alphabet))<0)||tab[i]=='\0')
+		{
+			j++;
+		}
+		else
+			tab[i-j]=tab[i];
+	}
+	printf("%s\n",tab );
+}
+
 
 void error(int e){
 	switch(e){

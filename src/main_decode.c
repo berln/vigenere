@@ -31,6 +31,7 @@ int main(int argc, char **argv)
 	int * iclef;
 	int * itab;
 	Boolean casetwo = FALSE;
+	Boolean rm_unknown_char = FALSE;
 
 
 	int c;
@@ -63,6 +64,7 @@ int main(int argc, char **argv)
 
        case 's':
             printf("option c with value '%s'\n", optarg);
+            rm_unknown_char = TRUE;
             break;
 
        case 'k':
@@ -94,13 +96,19 @@ int main(int argc, char **argv)
       break;
 }
 
+	if (rm_unknown_char == TRUE)
+		{
+			/* remove uknow char if -s */
+			printf("remove unknown char\n");
+			rm_unknown_char(tab, alphabet);
+		}
 
 	tailletab =strlen(tab)-1;
 	tailleclef=strlen(clef)-1;
 	itab=malloc(tailletab*sizeof(int));
 	iclef=malloc(tailleclef*sizeof(int));
 
-	printf("taille clef %d\n", tailleclef );
+
 
 	string_to_int (tab,alphabet,itab);
 	afficheint(itab,tailletab);
