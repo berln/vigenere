@@ -82,11 +82,13 @@ int main(int argc, char  *argv[])
 }
 
 
-	tailletab =strlen(tab);
-	tailleclef=strlen(clef);
+	tailletab =strlen(tab)-1;
+	tailleclef=strlen(clef)-1;
+  taillalpha=strlen(alphabet)-1;
 
 	itab=malloc(tailletab*sizeof(int));
 	iclef=malloc(tailleclef*sizeof(int));
+
 
 	printf("taille clef %d\n", tailleclef );
 
@@ -94,6 +96,7 @@ int main(int argc, char  *argv[])
 	afficheint(itab,tailletab);
 	string_to_int (clef,alphabet,iclef);
 	afficheint(iclef,tailleclef);
+  testclef(iclef, tailleclef);
 
 	codclef(iclef, itab, tailletab, tailleclef, taillalpha, &addition);
 

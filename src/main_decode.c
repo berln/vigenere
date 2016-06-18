@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 	char * alphabet = "abcdefghijklmnopqrstuvwxyz";
 	char * clef = "notaverysmartkey";
 	char * tab;
-	int taillalpha =26;
+	int taillalpha;
 	int tailletab;	
 	int tailleclef;
 	int * iclef;
@@ -105,6 +105,7 @@ int main(int argc, char **argv)
 
 	tailletab =strlen(tab)-1;
 	tailleclef=strlen(clef)-1;
+  taillalpha=strlen(alphabet)-1;
 	itab=malloc(tailletab*sizeof(int));
 	iclef=malloc(tailleclef*sizeof(int));
 
@@ -114,6 +115,7 @@ int main(int argc, char **argv)
 	afficheint(itab,tailletab);
 	string_to_int (clef,alphabet,iclef);
 	afficheint(iclef,tailleclef);
+  testclef(iclef, tailleclef);
 
 	codclef(iclef, itab, tailletab, tailleclef, taillalpha, &soustraction);
 

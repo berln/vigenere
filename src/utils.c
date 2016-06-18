@@ -22,12 +22,10 @@ int alphatoint(char l,char * alphabet){
 	{
 		printf("carac %c recherche %c\n",l,alphabet[i] );
 		if (l == alphabet[i])
-		{
 			return i;
-		}
 	}
 	/*la lettre n'est pas dans l'alphabet*/
-	return 0;
+	return -1;
 }
 
 void codclef (int * iclef,int * itab,int tailletab,int tailleclef,int taillalpha, operation_t operation){
@@ -40,7 +38,8 @@ void codclef (int * iclef,int * itab,int tailletab,int tailleclef,int taillalpha
 
 		passage d'une fonction en parametre par pointeur
 		resolution du pointeur et appele de la fonction*/
-		itab[i] = (*operation)(itab[i], iclef[j], taillalpha);
+		if ((itab[i]>=0)&&(iclef[j]>=0))
+			itab[i] = (*operation)(itab[i], iclef[j], taillalpha);
 
 		printf("resultat par clef %d\n", itab[i]);
 		/* code */
@@ -51,7 +50,10 @@ void inttoalpha(int * itab, char * tab, char * alphabet,int tailletab){
 	int i;
 	for (i = 0; i < tailletab ; ++i)
 	{
-		tab[i] = alphabet[itab[i]];
+		if (itab[i]>=0){
+			tab[i] = alphabet[itab[i]];
+			printf("caracter convert to alpha =%d = %c\n",itab[i],tab[i] );
+		}
 	}
 
 	tab[tailletab] = '\0';
@@ -103,6 +105,7 @@ void write_file(char * filename, char * var)
       
 }
 
+
 void rm_unknown_char(char * tab, cahr * alphabet){
 	int i;
 	int j;
@@ -111,20 +114,30 @@ void rm_unknown_char(char * tab, cahr * alphabet){
 	{
 		/* parsing tab in search of uknown cahr */
 		if (((alphatoint(tab[i],char * alphabet))<0)||tab[i]=='\0')
-		{
 			j++;
-		}
 		else
 			tab[i-j]=tab[i];
 	}
 	printf("%s\n",tab );
 }
 
+void testclef(int * itab, int tailleclef){
+	int i;
+	for (i = 0; i < tailleclef; ++i)
+	{
+		if (itab[i]<0)
+		{
+			error(2);
+		}
+	}
+}
+
 
 void error(int e){
 	switch(e){
 		case 1: printf("erreur d'alloc\n"); break;
-		default: printf("errur incunue\n"); break;
+		case 2: printf("carac not in alphabet\n"); break;
+		default: printf("error incunue\n"); break;
 	}
 	exit(e);
 }

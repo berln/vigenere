@@ -14,5 +14,6 @@ void * filetostring(char * read_file);
 void write_file(char * file, char * var);
 void rm_unknown_char(char * tab, cahr * alphabet);
 void error(int e);
+void testclef(int * itab, int tailleclef);
 
 #endif
