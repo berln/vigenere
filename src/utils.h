@@ -13,5 +13,6 @@ void inttoalpha(int * itab, char * tab, char * alphabet,int tailletab);
 void * filetostring(char * read_file);
 void write_file(char * file, char * var);
 void error(int e);
+void testclef(int * itab, int tailleclef);
 
 #endif
