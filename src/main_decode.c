@@ -78,20 +78,28 @@ int main(int argc, char **argv)
 
    switch(argc - optind){
       case 0:
+      /*in no argument read tab from keyboard*/
         printf("pas d'argument entrez une chaine\n");
         tab=calloc(100,sizeof(char));
-        fgets(tab,100,stdin);
+        fgets(tab,99,stdin);
       break;
       case 1:
+      /* if one argument then read file and put it in tab*/
         printf("arg 1 %s\n",argv[optind] );
         tab=filetostring(argv[optind]);
         printf("tableau lue dans %s = %s\n",argv[optind],tab );
       break;
       case 2:
+      /*if 2 argumpent read file an put it in tab then set casetow to true*/
         printf("arg2 %s\n",argv[optind-1] );
         casetwo=TRUE;
         tab=filetostring(argv[optind]);
       break;
+
+      default:
+        print_man(FALSE);
+            return 0;
+            break;
 }
 
 	if (unknown_char == TRUE)
@@ -103,7 +111,7 @@ int main(int argc, char **argv)
 
 	tailletab =strlen(tab);
 	tailleclef=strlen(clef);
-    taillalpha=strlen(alphabet);
+  taillalpha=strlen(alphabet);
 	itab=malloc(tailletab*sizeof(int));
 	iclef=malloc(tailleclef*sizeof(int));
 
@@ -123,6 +131,7 @@ int main(int argc, char **argv)
     	printf("message final: %s\n",tab);
   	}
 	else{
+    /*argv[optind+1] = file name*/
 		printf("ecriture de %s dans %s\n",tab,argv[optind+1]);
 		write_file(argv[optind+1],tab);
 	}	

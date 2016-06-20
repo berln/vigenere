@@ -69,7 +69,7 @@ int main(int argc, char  *argv[])
       case 0:
         printf("pas d'argument entrer une chaine\n");
         tab=calloc(100,sizeof(char));
-        fgets(tab,100,stdin);
+        fgets(tab,99,stdin);
       break;
       case 1:
         printf("arg 1 %s\n",argv[optind] );
@@ -81,6 +81,10 @@ int main(int argc, char  *argv[])
         casetwo=TRUE;
         tab=filetostring(argv[optind]);
       break;
+      default:
+        print_man(TRUE);
+        return 0;
+        break;
 	}
 
 	if (unknown_char == TRUE)

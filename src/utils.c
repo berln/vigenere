@@ -62,7 +62,8 @@ void afficheint(int * tab,int tailletab){
 	printf("\n");
 }
 
-void * filetostring(char * read_file){
+char * filetostring(char * read_file){
+	/*alloc of buffer befor reding file*/
     char * buffer;
     FILE *file;
     buffer= malloc(100*sizeof(char));
@@ -70,6 +71,7 @@ void * filetostring(char * read_file){
     	error(1);
     file = fopen(read_file, "r");
     if (file == NULL) {
+    	/*perror standard fuction for explaining fopent errors*/
       perror("Error");
     } else {
     		fscanf(file,"%s",buffer);
@@ -79,7 +81,7 @@ void * filetostring(char * read_file){
       
     }
 
-   
+   /*return address of the buffer*/
     return buffer;
 }
 
@@ -89,7 +91,8 @@ void write_file(char * filename, char * var)
  	
     file = fopen(filename, "r+");
     if (file== NULL)
-      error(1);
+    	/*perror standard fuction for explaining fopent errors*/
+       perror("Error");
   	
     fprintf(file,"%s\n",var);
     fclose(file);
@@ -111,11 +114,11 @@ void rm_unknown_char(char * tab, char * alphabet){
 	tab[i-j]='\0';
 }
 
-void testclef(int * itab, int tailleclef){
+void testclef(int * iclef, int tailleclef){
 	int i;
 	for (i = 0; i < tailleclef; ++i)
 	{
-		if (itab[i]<0)
+		if (iclef[i]<0)
 		{
 			error(2);
 		}
