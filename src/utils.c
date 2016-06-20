@@ -137,6 +137,8 @@ void error(int e){
 
 void print_man(Boolean option){
 	printf("Options : [-sh] [--help] [--skip] [-a alphabet] [-k clé] [--alphabet=alphabet] [--key=clé]\n");
+	
+	/*fuction called by main if it's decode argument is TRUE else argument is FASE*/  
 	if (option==TRUE)
 	{
 		printf("Le programme code encode un texte en utilisant le code Vigenere.\n Lorsqu aucun fichier n est fourni, l encodage se fait depuis l entree standard vers la sortie standard, ligne par ligne.\nLorsqu un seul fichier est fourni, l encodage se fait depuis le fichier vers la sortie standard.\nLorsque deux fichiers sont fournis, l encodage se fait depuis le premier vers le deuxieme.\nL option -s (--skip), lorsqu elle est presente, indique que les lettres du\n");

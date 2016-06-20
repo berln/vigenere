@@ -10,6 +10,7 @@ int addition(int lhs, int rhs, int taillealpha) {
 
 int main(int argc, char  *argv[])
 {
+  /*init of all tabs and vars*/
 	char * alphabet = "abcdefghijklmnopqrstuvwxyz";
 	char * clef = "notaverysmartkey";
 	char * tab;
@@ -22,6 +23,7 @@ int main(int argc, char  *argv[])
 	Boolean unknown_char = FALSE;
 
 
+  /*test options */
 	int c;
 
    while (1) {
@@ -40,7 +42,7 @@ int main(int argc, char  *argv[])
        switch (c) {
         
        case 'a':
-            printf("option awith value '%s'\n", optarg);
+            printf("option a with value of '%s'\n", optarg);
             alphabet=filetostring(optarg);
             break;
 
@@ -50,7 +52,7 @@ int main(int argc, char  *argv[])
             break;
 
        case 's':
-            printf("option c with value '%s'\n", optarg);
+            printf("option c with value of '%s'\n", optarg);
             unknown_char = TRUE;
             break;
 
@@ -65,18 +67,23 @@ int main(int argc, char  *argv[])
         }
     }
 
+    /*test args*/
+
     switch(argc - optind){
       case 0:
+      /*in no argument read tab from keyboard*/
         printf("pas d'argument entrer une chaine\n");
         tab=calloc(100,sizeof(char));
         fgets(tab,99,stdin);
       break;
       case 1:
+      /* if one argument then read file and put it in tab*/
         printf("arg 1 %s\n",argv[optind] );
         tab=filetostring(argv[optind]);
         printf("tableau lue dans %s = %s\n",argv[optind],tab );
       break;
       case 2:
+      /*if 2 argumpent read file an put it in tab then set casetow to true*/
         printf("arg2 %s\n",argv[optind-1] );
         casetwo=TRUE;
         tab=filetostring(argv[optind]);
@@ -96,26 +103,32 @@ int main(int argc, char  *argv[])
 
 	tailletab =strlen(tab);
 	tailleclef=strlen(clef);
-  	taillalpha=strlen(alphabet);
-
+  taillalpha=strlen(alphabet);
 	itab=malloc(tailletab*sizeof(int));
 	iclef=malloc(tailleclef*sizeof(int));
 
 
 	printf("taille clef %d\n", tailleclef );
 
-	string_to_int (tab,alphabet,itab);
+	/*convert tab and key to int tab*/
+  string_to_int (tab,alphabet,itab);
 	string_to_int (clef,alphabet,iclef);
-    testclef(iclef, tailleclef);
 
+  /*test invalid char in the key*/
+  testclef(iclef, tailleclef);
+
+  /*decod tab with the key, minus done with a pointer to the fuction*/ 
 	codclef(iclef, itab, tailletab, tailleclef, taillalpha, &addition);
 
+  /*convert the final int tab to a char tab*/
 	inttoalpha(itab, tab, alphabet, tailletab);
 
+  /*if a dest file have been specified write the result into the file elese print the result */
 	if(casetwo==FALSE){
     	printf("message final: %s\n",tab);
   	}
 	else{
+    /*argv[optind+1] = file name*/
 		printf("ecriture de %s dans %s\n",tab,argv[optind+1]);
 		write_file(argv[optind+1],tab);
 	}	

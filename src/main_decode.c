@@ -5,8 +5,6 @@
 #include <getopt.h>
 
 
-#define BUFF_SIZE 1024
-
 int soustraction(int lhs, int rhs, int taillalpha) {
 	int result = lhs - rhs;
 
@@ -19,7 +17,7 @@ int soustraction(int lhs, int rhs, int taillalpha) {
 int main(int argc, char **argv)
 {
 
-	/*char * tab = "ckitec";*/
+	/*init of all tabs and vars*/
 	char * alphabet = "abcdefghijklmnopqrstuvwxyz";
 	char * clef = "notaverysmartkey";
 	char * tab;
@@ -31,7 +29,7 @@ int main(int argc, char **argv)
 	Boolean casetwo = FALSE;
 	Boolean unknown_char = FALSE;
 
-
+  /*test options */
 	int c;
 
    while (1) {
@@ -76,6 +74,8 @@ int main(int argc, char **argv)
         }
     }
 
+    /*test args*/
+
    switch(argc - optind){
       case 0:
       /*in no argument read tab from keyboard*/
@@ -116,17 +116,21 @@ int main(int argc, char **argv)
 	iclef=malloc(tailleclef*sizeof(int));
 
 
-
+  /*convert tab and key to int tab*/
 	string_to_int (tab,alphabet,itab);
 
 	string_to_int (clef,alphabet,iclef);
 	
-    testclef(iclef, tailleclef);
+  /*test invalid char in the key*/
+  testclef(iclef, tailleclef);
 
+  /*decod tab with the key, minus done with a pointer to the fuction*/ 
 	codclef(iclef, itab, tailletab, tailleclef, taillalpha, &soustraction);
 
+  /*convert the final int tab to a char tab*/
 	inttoalpha(itab, tab, alphabet, tailletab);
 
+  /*if a dest file have been specified write the result into the file elese print the result */
 	if(casetwo==FALSE){
     	printf("message final: %s\n",tab);
   	}
