@@ -15,10 +15,10 @@ BINS=$(sort $(BIN_DECODE) $(BIN_ENCODE))
 all: $(EXEC)
 
 decode: $(BIN_DECODE)
-	$(CC) -o $@ $(BIN_DECODE) $(LDFLAGS)
+	$(CC) -o bin/$@ $(BIN_DECODE) $(LDFLAGS)
 
 encode:  $(BIN_ENCODE)
-	$(CC) -o $@ $(BIN_ENCODE) $(LDFLAGS)
+	$(CC) -o bin/$@ $(BIN_ENCODE) $(LDFLAGS)
 
 $(BINS): bin/%.o: src/%.c
 	$(CC) -c $< $(CFLAGS) -o $@
