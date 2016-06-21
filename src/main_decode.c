@@ -50,7 +50,7 @@ int main(int argc, char **argv)
         
        case 'a':
             printf("option awith value '%s'\n", optarg);
-            alphabet=filetostring(optarg);
+            alphabet=file_to_string(optarg);
             break;
 
        case 'h':
@@ -65,7 +65,7 @@ int main(int argc, char **argv)
 
        case 'k':
             printf("option d with value '%s'\n", optarg);
-            clef=filetostring(optarg);
+            clef=file_to_string(optarg);
             break;
 
        default:
@@ -86,14 +86,14 @@ int main(int argc, char **argv)
       case 1:
       /* if one argument then read file and put it in tab*/
         printf("arg 1 %s\n",argv[optind] );
-        tab=filetostring(argv[optind]);
+        tab=file_to_string(argv[optind]);
         printf("tableau lue dans %s = %s\n",argv[optind],tab );
       break;
       case 2:
       /*if 2 argumpent read file an put it in tab then set casetow to true*/
         printf("arg2 %s\n",argv[optind-1] );
         casetwo=TRUE;
-        tab=filetostring(argv[optind]);
+        tab=file_to_string(argv[optind]);
       break;
 
       default:
@@ -128,7 +128,11 @@ int main(int argc, char **argv)
 	codclef(iclef, itab, tailletab, tailleclef, taillalpha, &soustraction);
 
   /*convert the final int tab to a char tab*/
-	inttoalpha(itab, tab, alphabet, tailletab);
+	int_to_alpha(itab, tab, alphabet, tailletab);
+
+  /*free int tab*/
+  free(itab);
+  free(iclef);
 
   /*if a dest file have been specified write the result into the file elese print the result */
 	if(casetwo==FALSE){
@@ -139,6 +143,9 @@ int main(int argc, char **argv)
 		printf("ecriture de %s dans %s\n",tab,argv[optind+1]);
 		write_file(argv[optind+1],tab);
 	}	
+
+  /*free all alocations*/
+  free(tab);
 	
 	return 0;
 }

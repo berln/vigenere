@@ -7,11 +7,11 @@ void string_to_int(char * tab, char * alphabet, int * itab){
 	for (i = 0; tab [i] !='\0' ; ++i)
 	{
 		
-		itab[i]=alphatoint(tab[i],alphabet);
+		itab[i]=alpha_to_int(tab[i],alphabet);
 	}
 }
 
-int alphatoint(char l,char * alphabet){
+int alpha_to_int(char l,char * alphabet){
 	int i;
 	for (i = 0; alphabet [i] != '\0' ; ++i)
 	{
@@ -38,7 +38,7 @@ void codclef (int * iclef,int * itab,int tailletab,int tailleclef,int taillalpha
 	}
 }
 
-void inttoalpha(int * itab, char * tab, char * alphabet,int tailletab){
+void int_to_alpha(int * itab, char * tab, char * alphabet,int tailletab){
 	int i;
 	for (i = 0; i < tailletab ; ++i)
 	{
@@ -62,7 +62,7 @@ void afficheint(int * tab,int tailletab){
 	printf("\n");
 }
 
-char * filetostring(char * read_file){
+char * file_to_string(char * read_file){
 	/*alloc of buffer befor reding file*/
     char * buffer;
     FILE *file;
@@ -72,7 +72,10 @@ char * filetostring(char * read_file){
     file = fopen(read_file, "r");
     if (file == NULL) {
     	/*perror standard fuction for explaining fopent errors*/
-      perror("Error");
+    	perror("Error");
+    	/*free buffer in case of problem*/
+    	free(buffer);
+    	exit (1);
     } else {
     		fscanf(file,"%s",buffer);
 	printf("CONTENT: %s\n",buffer);
@@ -90,10 +93,13 @@ void write_file(char * filename, char * var)
     FILE *file;
  	
     file = fopen(filename, "r+");
-    if (file== NULL)
+    if (file== NULL){
     	/*perror standard fuction for explaining fopent errors*/
-       perror("Error");
-  	
+    	perror("Error");
+    	free(var);
+    	exit (1);
+    }
+    	  	
     fprintf(file,"%s\n",var);
     fclose(file);
       
@@ -106,7 +112,7 @@ void rm_unknown_char(char * tab, char * alphabet){
 	for (i = 0; tab[i+1] != '\0'; ++i)
 	{
 		/* parsing tab in search of uknown cahr */
-		if ((alphatoint(tab[i], alphabet))<0)
+		if ((alpha_to_int(tab[i], alphabet))<0)
 			j++;
 		else
 			tab[i-j]=tab[i];
