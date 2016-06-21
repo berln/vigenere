@@ -1,5 +1,5 @@
-#ifndef _DECODE
-#define _DECODE
+#ifndef _C_MASSON_2016_VIGENERE_SRC_UTILS_H
+#define _C_MASSON_2016_VIGENERE_SRC_UTILS_H
 #define BUFF_SIZE 1024
 
 typedef int (*operation_t)(int, int, int);
@@ -17,14 +17,14 @@ void afficheint(int * tab,int tailletab);
  * \param tab to convert.
  * \param alaphabet.
  */
-void string_to_int(char * tab, char * alaphabet, int * itab);
+void string_to_int(char * tab, char * alphabet, int * itab);
 
 /*! \brief convert a char to int.
  *
  * \param l cahr to convert.
  * \param alaphabet.
  */
-int alpha_to_int(char l,char * alaphabet);
+int alpha_to_int(char l,char * alphabet);
 
 /*! \brief add or substract tab and key.
  *
@@ -55,7 +55,7 @@ char * file_to_string(char * read_file);
  * \param file name.
  * \param var result tab.
  */
-void write_file(char * file, char * var);
+void write_file(char * filename, char * var);
 
 /*! \brief remove uknow char from tab.
  *
@@ -75,7 +75,7 @@ void error(int e);
  * \param tab of int.
  * \param lenth of the int tab. 
  */
-void testclef(int * itab, int tailleclef);
+void testclef(int * iclef, int tailleclef);
 
 /*! \brief programme manual.
  *
@@ -83,3 +83,6 @@ void testclef(int * itab, int tailleclef);
  */
 void print_man(Boolean option);
 #endif
+
+
+

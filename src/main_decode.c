@@ -43,8 +43,9 @@ int main(int argc, char **argv)
 
        c = getopt_long(argc, argv, "a:hk:s",
                  long_options, &option_index);
-        if (c == -1)
+        if (c == -1) {
             break;
+}
 
        switch (c) {
         

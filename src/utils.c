@@ -15,8 +15,9 @@ int alpha_to_int(char l,char * alphabet){
 	int i;
 	for (i = 0; alphabet [i] != '\0' ; ++i)
 	{
-		if (l == alphabet[i])
+		if (l == alphabet[i]) {
 			return i;
+}
 	}
 	/*la lettre n'est pas dans l'alphabet*/
 	return -1;
@@ -31,8 +32,9 @@ void codclef (int * iclef,int * itab,int tailletab,int tailleclef,int taillalpha
 
 		passage d'une fonction en parametre par pointeur
 		resolution du pointeur et appele de la fonction*/
-		if ((itab[i]>=0)&&(iclef[j]>=0))
+		if ((itab[i]>=0)&&(iclef[j]>=0)) {
 			itab[i] = (*operation)(itab[i], iclef[j], taillalpha);
+}
 
 		/* code */
 	}
@@ -67,8 +69,9 @@ char * file_to_string(char * read_file){
     char * buffer;
     FILE *file;
     buffer= malloc(100*sizeof(char));
-    if(buffer==NULL)
+    if(buffer==NULL) {
     	error(1);
+}
     file = fopen(read_file, "r");
     if (file == NULL) {
     	/*perror standard fuction for explaining fopent errors*/
@@ -112,10 +115,11 @@ void rm_unknown_char(char * tab, char * alphabet){
 	for (i = 0; tab[i+1] != '\0'; ++i)
 	{
 		/* parsing tab in search of uknown cahr */
-		if ((alpha_to_int(tab[i], alphabet))<0)
+		if ((alpha_to_int(tab[i], alphabet))<0) {
 			j++;
-		else
+		} else {
 			tab[i-j]=tab[i];
+}
 	}
 	tab[i-j]='\0';
 }
