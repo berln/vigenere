@@ -1,30 +1,30 @@
-#ifndef _C_MASSON_2016_VIGENERE_SRC_UTILS_H
-#define _C_MASSON_2016_VIGENERE_SRC_UTILS_H
+#ifndef _SRC_UTILS_H
+#define _SRC_UTILS_H
 #define BUFF_SIZE 1024
 
 typedef int (*operation_t)(int, int, int);
-typedef enum {FALSE,TRUE} Boolean;
+typedef enum { FALSE, TRUE } Boolean;
 
 /*! \brief print tab of int.
  *
  * \param tab to print.
  * \param tailletab tenth of tab.
  */
-void afficheint(int * tab,int tailletab);
+void afficheint(int* tab, int tailletab);
 
 /*! \brief convert a sting to int tab.
  *
  * \param tab to convert.
  * \param alaphabet.
  */
-void string_to_int(char * tab, char * alphabet, int * itab);
+void string_to_int(char* tab, char* alphabet, int* itab);
 
 /*! \brief convert a char to int.
  *
  * \param l cahr to convert.
  * \param alaphabet.
  */
-int alpha_to_int(char l,char * alphabet);
+int alpha_to_int(char l, char* alphabet);
 
 /*! \brief add or substract tab and key.
  *
@@ -32,7 +32,12 @@ int alpha_to_int(char l,char * alphabet);
  * \param tailletab tailleclef lenth of int tab.
  * \operation_t operation pointer to fuction in main.
  */
-void codclef (int * iclef,int * itab,int tailletab,int tailleclef,int taillalpha, operation_t operation);
+void codclef(int* iclef,
+             int* itab,
+             int tailletab,
+             int tailleclef,
+             int taillalpha,
+             operation_t operation);
 
 /*! \brief convert int tab to char tab.
  *
@@ -41,28 +46,28 @@ void codclef (int * iclef,int * itab,int tailletab,int tailleclef,int taillalpha
  * \param alphabet.
  * \param tailletab lenth of itab.
  */
-void int_to_alpha(int * itab, char * tab, char * alphabet,int tailletab);
+void int_to_alpha(int* itab, char* tab, char* alphabet, int tailletab);
 
 /*! \brief read a string from file.
  *
  * \param read_file name of the file to read.
  * \return the content of the file.
  */
-char * file_to_string(char * read_file);
+char* file_to_string(char* read_file);
 
 /*! \brief write a string in a file.
  *
  * \param file name.
  * \param var result tab.
  */
-void write_file(char * filename, char * var);
+void write_file(char* filename, char* var);
 
 /*! \brief remove uknow char from tab.
  *
  * \param tab tab of key.
- * \param alphabet 
+ * \param alphabet
  */
-void rm_unknown_char(char * tab, char * alphabet);
+void rm_unknown_char(char* tab, char* alphabet);
 
 /*! \brief error fuction.
  *
@@ -73,16 +78,13 @@ void error(int e);
 /*! \brief test if char is in alphabet.
  *
  * \param tab of int.
- * \param lenth of the int tab. 
+ * \param lenth of the int tab.
  */
-void testclef(int * iclef, int tailleclef);
+void testclef(int* iclef, int tailleclef);
 
 /*! \brief programme manual.
  *
- * \param option for the man. 
+ * \param option for the man.
  */
 void print_man(Boolean option);
 #endif
-
-
-

@@ -29,10 +29,13 @@ clean:
 clear: clean
 	$(RM) $(EXEC) $(USER)_sokoban.tgz
 
-bertrand_vigenere.tgz: clear
-	mkdir -p $(USER)_sokoban
-	cp Makefile *.c *.h *.sok $(USER)_sokoban
-	tar czf $(USER)_sokoban.tgz $(USER)_sokoban
-	rm -rf $(USER)_sokoban
+tgz: clear
+	mkdir -p lanoeb_durans
+	cp makefile lanoeb_durans
+	cp -r bin lanoeb_durans
+	cp -r src lanoeb_durans
+	cp -r test lanoeb_durans
+	tar czf lanoeb_durans.tgz lanoeb_durans
+	rm -rf lanoeb_durans
 
 .PHONY: all clean clear
